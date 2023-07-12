@@ -6,6 +6,7 @@ import InputCounter from "./inputCounter";
 
 const Hero = (socket) => {
   // State for tracking input values
+  const [name,setName] = useState("")
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [veg, setVeg] = useState(0);
@@ -21,13 +22,14 @@ const Hero = (socket) => {
   let submitData = () => {
     console.log(socket.socket)
     const data = {
-      name:"tirth",
+      name:name,
       phone:phone,
       address:address,
       veg:veg,
       nonVeg:nonVeg,
       chappati:chappati,
       rice:rice,
+      clientID:socket.socket.id,
     }
     console.log(data)
     socket.socket.emit("foodInfo",(data))
@@ -35,11 +37,20 @@ const Hero = (socket) => {
 
   return (
     <>
-        <div className="font-bold">
+        <div className="font-bold ">
             Connection status -
         </div>
       <div className="flex font-mono items-center justify-center flex-col">
         <div className="mt-[5%] text-lg">
+          <div>
+            Enter your name - {""}
+            <input
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="rounded-md m-[5%]"
+            />
+          </div>
           <div>
             Please enter your phone number - {""}
             <input
