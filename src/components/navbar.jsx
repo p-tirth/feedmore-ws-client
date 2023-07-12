@@ -4,7 +4,11 @@ import {io} from 'socket.io-client'
 function Navbar({onSocket}) {
   var socket
   const handleReconnect = () =>{
-    socket = io('wss://donation-4tlz.onrender.com/')
+    const serverAddress = 'wss://donation-4tlz.onrender.com/' 
+    socket = io(serverAddress,
+      {headers: {
+        "user-agent" : "Mozilla",
+      }})
     socket.on("connect",()=>{
       console.log(`You connected with id:${socket.id}`)
       socket.emit("clientConnection","hello")
