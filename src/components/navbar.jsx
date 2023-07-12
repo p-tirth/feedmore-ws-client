@@ -6,7 +6,7 @@ function Navbar({onSocket}) {
   const handleReconnect = () =>{
     const localServer = "ws://localhost:3000"
     const serverAddress = 'wss://donation-4tlz.onrender.com/' 
-    socket = io(localServer,
+    socket = io(serverAddress,
       {headers: {
         "user-agent" : "Mozilla",
       }})
